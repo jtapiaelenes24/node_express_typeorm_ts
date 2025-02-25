@@ -1,27 +1,21 @@
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
-import studentsRoutes from "./routes/studentsRoutes";
-import teachersRoutes from "./routes/teachersRoutes";
-import coursesRoutes from "./routes/coursesRoutes";
+import app from "./app";
+import { AppDataSource } from "./db/connection";
 
-const app = express();
+async function main() {
+  try {
+    await AppDataSource.initialize();
+    console.log("DB succesfully connected.");
+    app.listen(6505, () => {
+      console.log("Active server.");
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      console.log(err.message);
+    }
+  }
+}
 
-app.use(morgan("dev"));
-app.use(cors());
-
-app.get("/", (req, res) => {
-  console.log("Hola Mundo");
-  res.send("Hola Mundo");
-});
-
-app.use("/students", studentsRoutes);
-app.use("/teachers", teachersRoutes);
-app.use("/courses", coursesRoutes);
-
-app.listen(6505, () => {
-  console.log("Active server.");
-});
+main();
 
 // https://www.youtube.com/watch?v=yd_QpXWrbtQ&t=5383s
 // 1:48:57
