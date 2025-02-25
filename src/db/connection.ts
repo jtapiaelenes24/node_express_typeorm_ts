@@ -1,4 +1,7 @@
 import { DataSource } from "typeorm";
+import { Student } from "../models/studentsModel";
+import { Teacher } from "../models/teachersModel";
+import { Course } from "../models/coursesModel";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -8,5 +11,6 @@ export const AppDataSource = new DataSource({
   password: "1234",
   database: "courses",
   logging: true,
-  entities: [],
+  entities: [Student, Teacher, Course],
+  synchronize: true,
 });
