@@ -1,1 +1,1 @@
-<h1>Migration from a MySQL database to an ORM using TypeScript</h1>
+<h1>Migrating Courses API data layer from MySQL to TypeORM</h1>
