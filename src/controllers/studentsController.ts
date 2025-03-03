@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
+import { Student } from "../models/studentsModel";
 
 class StudentsController {
   constructor() {}
 
-  get(req: Request, res: Response) {
+  async get(req: Request, res: Response) {
     try {
-      res.send("GET");
+      const data = await Student.find();
+      res.status(200).json(data);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);
@@ -13,9 +15,14 @@ class StudentsController {
     }
   }
 
-  getDetails(req: Request, res: Response) {
+  async getDetails(req: Request, res: Response) {
     try {
-      res.send("GET DETAILS");
+      const { id } = req.params;
+      const register = await Student.findOneBy({ id: Number(id) });
+      if (!register) {
+        throw new Error("Student not found");
+      }
+      res.status(200).json(register);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);
@@ -23,9 +30,10 @@ class StudentsController {
     }
   }
 
-  insert(req: Request, res: Response) {
+  async insert(req: Request, res: Response) {
     try {
-      res.send("INSERT");
+      const register = await Student.save(req.body);
+      res.status(201).json(register);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);
@@ -33,9 +41,16 @@ class StudentsController {
     }
   }
 
-  update(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
+    const { id } = req.params;
     try {
-      res.send("UPDATE");
+      const register = await Student.findOneBy({ id: Number(id) });
+      if (!register) {
+        throw new Error("Student not found");
+      }
+      await Student.update({ id: Number(id) }, req.body);
+      const registerUpdated = await Student.findOneBy({ id: Number(id) });
+      res.status(200).json(registerUpdated);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);
@@ -43,9 +58,15 @@ class StudentsController {
     }
   }
 
-  delete(req: Request, res: Response) {
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
     try {
-      res.send("DELETE");
+      const register = await Student.findOneBy({ id: Number(id) });
+      if (!register) {
+        throw new Error("Student not found");
+      }
+      await Student.delete({ id: Number(id) });
+      res.sendStatus(204);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);

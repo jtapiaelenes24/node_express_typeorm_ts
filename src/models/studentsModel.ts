@@ -4,24 +4,25 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  BaseEntity,
 } from "typeorm";
 
 @Entity("students")
-export class Student {
+export class Student extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  dni: String;
+  dni: string;
 
   @Column()
-  name: String;
+  name: string;
 
   @Column()
-  lastname: String;
+  lastname: string;
 
   @Column()
-  email: String;
+  email: string;
 
   @CreateDateColumn()
   createdAt: Date;

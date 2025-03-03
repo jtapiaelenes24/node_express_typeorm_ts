@@ -12,5 +12,5 @@ export const AppDataSource = new DataSource({
   database: "courses",
   logging: true,
   entities: [Student, Teacher, Course],
-  synchronize: true,
+  synchronize: false,
 });

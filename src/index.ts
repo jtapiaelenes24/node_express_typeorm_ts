@@ -5,7 +5,7 @@ async function main() {
   try {
     await AppDataSource.initialize();
     console.log("DB succesfully connected.");
-    app.listen(6505, () => {
+    app.listen(6500, () => {
       console.log("Active server.");
     });
   } catch (err) {
@@ -16,6 +16,3 @@ async function main() {
 }
 
 main();
-
-// https://www.youtube.com/watch?v=yd_QpXWrbtQ&t=5383s
-// 1:48:57

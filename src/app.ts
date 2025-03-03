@@ -7,6 +7,7 @@ import coursesRoutes from "./routes/coursesRoutes";
 
 const app = express();
 
+app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
