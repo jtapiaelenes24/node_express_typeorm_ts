@@ -8,18 +8,19 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  BaseEntity,
 } from "typeorm";
 
 import { Teacher } from "./teachersModel";
 import { Student } from "./studentsModel";
 
 @Entity("courses")
-export class Course {
+export class Course extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: number;
+  name: String;
 
   @Column("text")
   description: String;

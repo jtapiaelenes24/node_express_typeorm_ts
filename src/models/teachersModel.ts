@@ -5,12 +5,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  BaseEntity,
 } from "typeorm";
 
 import { Course } from "./coursesModel";
 
 @Entity("teachers")
-export class Teacher {
+export class Teacher extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

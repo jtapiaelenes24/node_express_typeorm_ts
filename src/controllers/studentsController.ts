@@ -66,7 +66,7 @@ class StudentsController {
         throw new Error("Student not found");
       }
       await Student.delete({ id: Number(id) });
-      res.sendStatus(204);
+      res.status(204);
     } catch (err) {
       if (err instanceof Error) {
         res.status(500).send(err.message);
